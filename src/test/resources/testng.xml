@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SuiteExample" verbose="1">
+    <test name="TestExample" preserve-order="true">
+        <classes>
+            <class name="test.TestOne"/>
+            <class name="test.TestTwo"/>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="listener.AnnotationTransformer"/>
+    </listeners>
+</suite>
