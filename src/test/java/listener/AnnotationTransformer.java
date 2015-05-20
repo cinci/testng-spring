@@ -32,7 +32,9 @@ public class AnnotationTransformer implements IAnnotationTransformer2 {
     public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
         final List<String> groups = Arrays.asList(annotation.getGroups());
 
-        if(groups.contains(TestGroups.DISABLE_IN_RUNTIME)) {
+        // annotation.setEnabled(false);
+
+        if (groups.contains(TestGroups.DISABLE_IN_RUNTIME)) {
             annotation.setEnabled(false);
         }
     }

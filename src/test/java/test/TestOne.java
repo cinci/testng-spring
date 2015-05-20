@@ -1,6 +1,5 @@
 package test;
 
-import config.AbstractTest;
 import config.TestGroups;
 import org.testng.annotations.Test;
 

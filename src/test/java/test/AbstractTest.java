@@ -1,14 +1,16 @@
-package config;
+package test;
 
+import config.FixedAbstractTestNGSpringContextTests;
+import config.TestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import service.SimpleService;
 
 /**
@@ -20,13 +22,18 @@ import service.SimpleService;
                 DependencyInjectionTestExecutionListener.class,
                 DirtiesContextTestExecutionListener.class
         })
-public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
+public abstract class AbstractTest extends FixedAbstractTestNGSpringContextTests {
 
     @Autowired
     private SimpleService simpleService;
 
+    @BeforeSuite(alwaysRun = true)
+    public void beforeSuite() {
+        System.out.println("--> Before Suite: " + this.getClass().getName());
+    }
+
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws Exception {
+    public void beforeClass() throws Exception {
         System.out.println("--> Before Class: " + this.getClass().getName());
     }
 
@@ -39,8 +46,8 @@ public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
     public void afterSuite() throws Exception {
         System.out.println("--> After Suite: " + this.getClass().getName());
 
-        if(simpleService == null) {
-            System.out.println("Spring configuration FAILED !!!");
+        if (simpleService == null) {
+            System.out.println("Spring Beans not INITIALIZED !!!");
         }
     }
 }
